@@ -8,5 +8,9 @@
     -moz-box-shadow: 0 4px 4px -2px #232323;
     -webkit-box-shadow: 0 4px 4px -2px #232323;
     background-color: #FFFF00;
+}
 
+.selected {
+	color:#ff0000;
+	border:2px solid;
 }

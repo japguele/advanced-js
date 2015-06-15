@@ -1,4 +1,3 @@
-
-
-<div class="tile" style="left : calc({{tile.xPos}} * 30px) ; top : calc({{tile.yPos}} * 60px - {{tile.zPos}} * 2px)">suit :  {{tile.tile.suit}} </br> number : {{tile.tile.name}}</div>
-
+<div class="tile" style="left : calc({{tile.xPos}} * 30px) ; top : calc({{tile.yPos}} * 60px - {{tile.zPos}} * 2px)" ng-click="selectTile(tile)" ng-class="{selected: tile.selected}">
+	suit : {{tile.tile.suit}} </br> number : {{tile.tile.name}}
+</div>
