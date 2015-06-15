@@ -4,7 +4,20 @@ module.exports =  function($scope , GamesFactory,$http){
 
 
 	this.joinedGame = false;
+	
+	this.getGames = function(){
+		alert("lala");
+		$http.get("https://mahjongmayhem.herokuapp.com/Games")
+       	.then(function(res){
+       	
+        GamesFactory.Games = res;       
+        });
 
+	}
+
+
+	
+	
 	this.addGame = function(){
 	
 
