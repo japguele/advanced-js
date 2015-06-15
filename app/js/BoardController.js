@@ -1,8 +1,23 @@
-module.exports = function($scope, TileFactory) {
+module.exports =  function($scope,TileFactory, $stateParams){
+    var scope = this;
+this.gameId = $stateParams.gameid;
 
+
+this.tiles = {};
+
+
+
+this.init = function() {
+    TileFactory.getTiles(this.gameId,function(res){
+        console.log(res);
+        scope.tiles = res;
+    })
+}
+        
+
+
+    
     var selectedTile = null;
-
-    TileFactory.getTiles("https://mahjongmayhem.herokuapp.com/games/5541fc5b1872631100678bb4/tiles");
 
     $scope.selectTile = function(tile) {
         var selectable = this.checkSelectableTile(tile);
@@ -30,7 +45,7 @@ module.exports = function($scope, TileFactory) {
     }
 
     $scope.checkSelectableTile = function(tile){
-        var allTiles = TileFactory.returnTiles();
+        var allTiles = scope.tiles;
 
         var detectedTilesRight = [];
         var detectedTilesLeft = [];
@@ -72,9 +87,7 @@ module.exports = function($scope, TileFactory) {
         return selectable;
     }
 
-    this.getTiles = function() {
-        return TileFactory.Tiles;
-    }
+   
 
     $scope.matchTiles = function(tile1, tile2) {
         var isMatch = false;
