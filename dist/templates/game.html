@@ -1,5 +1,38 @@
-<link rel="stylesheet" href="css/css.css" />
-
-<div ng-repeat="tile in board.getTiles() track by $index | filter:{matched : nil}">
-    <tile></tile>
+<div ng-init="board.init()">
+	<div class="page-header">
+        <h1>Informatie over deze game</h1>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Game ID</th>
+                        <th>Layout</th>
+                        <th>Created By</th>
+                        <th>Players</th>
+                        <th>State</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>{{ board.game.id }}</td>
+                        <td>{{ board.game.gameTemplate.id }}</td>
+                        <td>{{ board.game.createdBy.name }}</td>
+                        <td>
+                            <div ng-repeat="player in board.game.players">
+                                Name : {{ player.name }}
+                            </div>
+                        </td>
+                        <td>{{ board.game.state }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="board">
+	    <div ng-repeat="tile in board.tiles track by $index | filter:{matched : nil}">
+	        <tile></tile>
+	    </div>
+	</div>
 </div>

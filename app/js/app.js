@@ -67,7 +67,6 @@ app.config(function($routeProvider){
       
       $stateProvider
         .state('gameboard', {
-            
             url: '/games/:gameid',
             templateUrl: 'templates/game.html', 
             controller: "BoardController as board"          
