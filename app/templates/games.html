@@ -29,8 +29,8 @@
                             </div>
                         </td>
                         <td>{{ game.state }}</td>
-                        <td><button class="button" ng-click="Games.joinGame(game.id)" ng-show="!Games.joinedGame">Join Game</button></td>
-                        <td><button ng-click="Games.leaveGame(game.id)" ng-show="Games.joinedGame">Leave Game</button></td>
+                        <td><button class="button" ng-click="games.joinGame(game.id)" ng-show="!games.joinedGame">Join Game</button></td>
+                        <td><button ng-click="games.leaveGame(game.id)" ng-show="games.joinedGame">Leave Game</button></td>
                     </tr>
                 </tbody>
             </table>

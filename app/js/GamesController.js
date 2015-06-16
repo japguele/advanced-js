@@ -22,7 +22,7 @@ module.exports = function($scope, GameFactory, $http, $q) {
              GameFactory.addSelfTogame(res.data);
         });
        
-        
+    }
         
 
    

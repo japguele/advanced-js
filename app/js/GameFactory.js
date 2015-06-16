@@ -6,7 +6,7 @@ module.exports = function($http,$window){
 
 
         
-    }
+    
 
     factory.addSelfTogame = function(game){
         alert("https://mahjongmayhem.herokuapp.com/Games/"+ game.id + "/Players");
