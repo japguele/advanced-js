@@ -9,9 +9,10 @@ var gamesController = require('./GamesController');
 var gameFactory = require('./GameFactory');
 var roomController = require('./RoomController');
 var boardController = require('./BoardController');
-var tileFactory =  require('./TileFactory')
-var app = angular.module('app', ['ui.router'])
-
+var tileFactory =  require('./TileFactory');
+var loginController = require('./LoginController');
+var app = angular.module('app', ['ui.router']);
+var inGamefilter = require('../filters/InGame');
 
 app.directive('tile', function(){
 return {
@@ -25,6 +26,32 @@ return {
 
 }
 });
+
+
+app.factory('httpRequestInterceptor', [ '$window' , function ($window) {
+    return {     
+        request: function (config) { 
+
+          if($window.sessionStorage.token) {
+            
+              config.headers['x-username'] = $window.sessionStorage.username;
+
+              config.headers['x-token'] = $window.sessionStorage.token;
+
+          }
+         
+          return config;
+        }
+    }
+}]);
+
+app.config([ '$httpProvider', function($httpProvider)
+{
+    $httpProvider.interceptors.push('httpRequestInterceptor');
+}]);
+
+
+
 /*
 app.config(function($routeProvider){
     $routeProvider.
@@ -57,13 +84,11 @@ app.config(function($routeProvider){
 
 });*/
 
-   app.config(function($stateProvider, $urlRouterProvider){
-      
-      $urlRouterProvider.when("", "/games");
-      $urlRouterProvider.when("/", "/games");
+   app.config(function($stateProvider, $urlRouterProvider,$locationProvider){
+   
      
       // For any unmatched url, send to /route1
-      $urlRouterProvider.otherwise("/games");
+  
       
       $stateProvider
         .state('gameboard', {
@@ -78,11 +103,27 @@ app.config(function($routeProvider){
             templateUrl: 'templates/games.html',
             controller: "GamesController as games"
            
-        })        
+        }) 
+         .state('login', {
+            url: '/login',    
+                  
+            controller: "LoginController as login"
+           
+        })     
+         .state('logout', {
+            url: '/logout',    
+                  
+            controller: "LoginController as login"
+           
+        })          
+         $urlRouterProvider.otherwise("/games");
     })
+   
+app.filter('inGame',inGamefilter);   
 app.factory('GameFactory',gameFactory);
 app.factory('TileFactory',tileFactory);
 app.controller('BoardController', boardController);
 app.controller('GamesController' , gamesController);
 app.controller('RoomController' , roomController);
+app.controller('LoginController' , loginController);
 

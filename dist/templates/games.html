@@ -1,37 +1,49 @@
-<input type="text" id="name" />
-<input type="hidden" id="tempid">0</p>
-<div ng-repeat="game in games.games" ng-show="game.state == 'open'">
-    layout : {{ game.layout }}
-    <br/> createdBy : {{ game.createdBy.name }}
-    <br/> state : {{ game.state }}
-    <br/> id : {{ game.id }}
-    <br/> Players in game :
-    <br/> Creator : {{ game.createdBy.name }}
-    <br/>
-    <div ng-repeat="player in game.players">
-        Name : {{player.name}}
-        <br/>
+    
+    <input type="text" id="name"/>
+    <input type="hidden" id="tempid">0</p>
+    <div ng-onLoad="games.init()">
+    <div ng-repeat="game in games.games | inGame : true | filter:{state : 'open'} ">
+        
+            layout : {{ game.layout }} <br/>
+            createdBy : {{ game.createdBy.name }} <br/>
+            state : {{ game.state }} <br/>
+            id : {{ game.id }} <br/>
+            Players in game : <br/>
+            
+                    Creator : {{ game.createdBy.name }} <br/>
+            <div ng-repeat="player in game.players">
+                    Name : {{player.name}} <br/>
+
+             </div>
+
+
+        <button class="button" ng-click="games.joinGame(game.id)" ng-show="!games.joinedGame" >join game </button>
+    <button ng-click="games.leaveGame($index)" ng-show="games.joinedGame" >leave game </button>
+            
+        
     </div>
-    <button class="button" ng-click="games.joinGame($index)" ng-show="!games.joinedGame">join game </button>
-    <button ng-click="games.leaveGame($index)" ng-show="games.joinedGame">leave game </button>
-</div>
-create a game
-<div ng-show="!games.joinedGame">
-    <form>
-        layout
-        <select id="layout">
-            <option value="shanghai">shanghai</option>
-            <option value="snake">snake</option>
-            <option value="ox">ox</option>
-            <option value="ram">ram</option>
-            <option value="dragon">dragon</option>
-            <option value="rooster">rooster</option>
-            <option value="monkey">monkey</option>
-        </select>
-        <br/> minplayers
-        <input id="minplayers" type="text" />
-        <br/> maxplayers
-        <input id="maxplayers" type="text" />
-        <input type="submit" value="submit" ng-click="games.addGame();" />
-    </form>
-</div>
+    specate game
+    <div ng-repeat="game in games.games | filter:{state : 'playing'}">
+        <a href="#/games/{{game._id}}" >game</a>
+        
+            layout : {{ game.layout }} <br/>
+            createdBy : {{ game.createdBy.name }} <br/>
+            state : {{ game.state }} <br/>
+            id : {{ game.id }} <br/>
+            Players in game : <br/>
+            
+                    Creator : {{ game.createdBy.name }} <br/>
+            <div ng-repeat="player in game.players">
+                    Name : {{player.name}} <br/>
+
+             </div>
+
+
+            
+        
+    </div>
+ </div>
+
+ 
+
+   

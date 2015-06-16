@@ -1,5 +1,8 @@
+ 
+<div ng-init="board.init()">
 <link rel="stylesheet" href="css/css.css" />
 
-<div ng-repeat="tile in board.getTiles() track by $index | filter:{matched : nil}">
+<div ng-repeat="tile in board.tiles track by $index | filter:{matched : nil}">
     <tile></tile>
+</div>
 </div>

@@ -13,11 +13,14 @@ module.exports =  function($scope , GameFactory,$http ,$q){
         GameFactory.addGame(document.getElementById("layout").selected,{name :document.getElementById("name").value},document.getElementById("minplayers").value,document.getElementById("maxplayers").value);
     
     };
-    this.joinGame = function(index){
+    this.joinGame = function(gameid){
         this.joinedGame = true;
         
-    
-        GameFactory.addPlayerTogame(index,document.getElementById("tempid").value,document.getElementById("name").value);
+        alert(gameid);
+        GameFactory.getGame(gameid,function(res){
+             GameFactory.addSelfTogame(res.data);
+        });
+       
         
         
     }

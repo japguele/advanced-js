@@ -2,7 +2,7 @@
     <input type="text" id="name"/>
     <input type="hidden" id="tempid">0</p>
     <div ng-onLoad="games.init()">
-    <div ng-repeat="game in games.games | filter:{state : 'open'}">
+    <div ng-repeat="game in games.games | inGame : true | filter:{state : 'open'} ">
         
             layout : {{ game.layout }} <br/>
             createdBy : {{ game.createdBy.name }} <br/>
@@ -17,8 +17,8 @@
              </div>
 
 
-        <button class="button" ng-click="Games.joinGame($index)" ng-show="!Games.joinedGame" >join game </button>
-    <button ng-click="Games.leaveGame($index)" ng-show="Games.joinedGame" >leave game </button>
+        <button class="button" ng-click="games.joinGame(game.id)" ng-show="!games.joinedGame" >join game </button>
+    <button ng-click="games.leaveGame($index)" ng-show="games.joinedGame" >leave game </button>
             
         
     </div>
