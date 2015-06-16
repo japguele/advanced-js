@@ -1,7 +1,9 @@
+
 module.exports = function($http,$window){
 
-    var factory= {};
-    factory.addGame = function(layout, createdBy,minPlayers,maxPlayers){
+
+    var factory = {};
+
 
         
     }
@@ -50,28 +52,26 @@ module.exports = function($http,$window){
     }
 
     factory.removeSelfFromGame = function(){
+	
+	}
         
 
 
+
+    factory.getGame = function(gameid, callback) {
+        $http.get("https://mahjongmayhem.herokuapp.com/Games/" + gameid)
+            .then(function(res) {
+                callback(res);
+            });
     }
-    factory.getGame = function(gameid,callback){
-                $http.get("https://mahjongmayhem.herokuapp.com/Games/" + gameid)
-            .then(function(res){
-            callback(res);
-       });
-    }
+
     factory.getGames = function(callback) {
         // body...
         $http.get("https://mahjongmayhem.herokuapp.com/Games")
-        .then(function(res){
-
-            callback(res.data);
-        
-       });
-
+            .then(function(res) {
+                callback(res.data);
+            });
     }
-
-
 
     return factory;
 }

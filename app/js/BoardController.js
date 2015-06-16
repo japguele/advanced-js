@@ -1,35 +1,32 @@
-module.exports =  function($scope,TileFactory, $stateParams){
+module.exports = function($scope, TileFactory, GameFactory, $stateParams) {
     var scope = this;
-this.gameId = $stateParams.gameid;
+    this.gameId = $stateParams.gameid;
 
+    this.tiles = {};
 
-this.tiles = {};
+    this.init = function() {
+        scope.game = GameFactory.getGame(this.gameId, function(res){
+            scope.game = res.data;
+        });
 
+        TileFactory.getTiles(this.gameId, function(res) {
+            scope.tiles = res;
+        });
+    }
 
-
-this.init = function() {
-    TileFactory.getTiles(this.gameId,function(res){
-        console.log(res);
-        scope.tiles = res;
-    })
-}
-        
-
-
-    
     var selectedTile = null;
 
     $scope.selectTile = function(tile) {
         var selectable = this.checkSelectableTile(tile);
 
-        if(selectable == true){
-            if(selectedTile == null){
+        if (selectable == true) {
+            if (selectedTile == null) {
                 tile.selected = true;
                 selectedTile = tile;
             } else {
                 var isMatch = this.matchTiles(selectedTile, tile);
 
-                if(isMatch == true){
+                if (isMatch == true) {
                     console.log("Een match!");
                     // HIER DE MATCH POSTEN MET TILE 'selectedTile' en 'tile'
                 } else {
@@ -44,7 +41,7 @@ this.init = function() {
         }
     }
 
-    $scope.checkSelectableTile = function(tile){
+    $scope.checkSelectableTile = function(tile) {
         var allTiles = scope.tiles;
 
         var detectedTilesRight = [];
@@ -54,15 +51,15 @@ this.init = function() {
         var selectable = false;
 
         allTiles.forEach(function(entry) {
-            if(tile.xPos + 2 == entry.xPos && tile.yPos - 2 < entry.yPos && tile.yPos + 2 > entry.yPos && tile.zPos == entry.zPos){
+            if (tile.xPos + 2 == entry.xPos && tile.yPos - 2 < entry.yPos && tile.yPos + 2 > entry.yPos && tile.zPos == entry.zPos) {
                 detectedTilesRight.push(entry);
-            } else if (tile.xPos - 2 == entry.xPos && tile.yPos - 2 < entry.yPos && tile.yPos + 2 > entry.yPos && tile.zPos == entry.zPos){
+            } else if (tile.xPos - 2 == entry.xPos && tile.yPos - 2 < entry.yPos && tile.yPos + 2 > entry.yPos && tile.zPos == entry.zPos) {
                 detectedTilesLeft.push(entry);
             }
 
-            if(tile.xPos == entry.xPos || tile.xPos + 1 == entry.xPos || tile.xPos - 1 == entry.xPos){
-                if(tile.yPos == entry.yPos || tile.yPos + 1 == entry.yPos || tile.yPos - 1 == entry.yPos){
-                    if(tile.zPos < entry.zPos){
+            if (tile.xPos == entry.xPos || tile.xPos + 1 == entry.xPos || tile.xPos - 1 == entry.xPos) {
+                if (tile.yPos == entry.yPos || tile.yPos + 1 == entry.yPos || tile.yPos - 1 == entry.yPos) {
+                    if (tile.zPos < entry.zPos) {
                         detectedTilesOnTop.push(entry);
                     }
                 }
@@ -78,24 +75,24 @@ this.init = function() {
         //console.log("This tile:");
         //console.log(tile);
 
-        if(detectedTilesOnTop.length == 0){
-            if(detectedTilesRight.length == 0 || detectedTilesLeft.length == 0){
+        if (detectedTilesOnTop.length == 0) {
+            if (detectedTilesRight.length == 0 || detectedTilesLeft.length == 0) {
                 selectable = true;
             }
         }
-        
+
         return selectable;
     }
 
-   
+
 
     $scope.matchTiles = function(tile1, tile2) {
         var isMatch = false;
 
-        if(tile1 != tile2){
-            if(tile1.tile.suit == tile2.tile.suit){
-                if(tile1.tile.matchesWholeSuit == false || tile2.tile.matchesWholeSuit == false){
-                    if(tile1.tile.name == tile2.tile.name){
+        if (tile1 != tile2) {
+            if (tile1.tile.suit == tile2.tile.suit) {
+                if (tile1.tile.matchesWholeSuit == false || tile2.tile.matchesWholeSuit == false) {
+                    if (tile1.tile.name == tile2.tile.name) {
                         isMatch = true;
                     } else {
                         console.log("Naast de suit moet bij deze tile ook de name overeen komen. Dit is niet het geval.");
