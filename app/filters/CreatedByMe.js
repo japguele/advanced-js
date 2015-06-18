@@ -2,18 +2,17 @@
 			return function(items,bool) {
    		 	var filtered = [];
     		angular.forEach(items, function(item) {
-    			var inGame = false;
-    			for (var i = item.players.length - 1; i >= 0; i--) {
-    				if(item.players[i]._id == $window.sessionStorage.username){
-    					inGame = true;
-    				}
-    			};
+    			var createdByMe = false;
+    			if(item.createdBy._id == $window.sessionStorage.username){
+    					createdByMe = true;
+    			}
+    			
           if(!bool){
-      			if(!inGame) {
+      			if(!createdByMe) {
         			filtered.push(item);
       			}
           }else{
-              if(inGame) {
+              if(createdByMe) {
               filtered.push(item);
             }
           }

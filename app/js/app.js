@@ -13,7 +13,12 @@ var tileFactory =  require('./TileFactory');
 var loginController = require('./LoginController');
 var app = angular.module('app', ['ui.router']);
 var inGamefilter = require('../filters/InGame');
+var playerMatchedTile = require('../filters/PlayerMatchedTile');
+var createdByMe = require('../filters/CreatedByMe');
 
+
+//var io = require('socket.io').listen(httpServer);
+//io.use(sharedsession(session));
 app.directive('tile', function(){
 return {
     restrict: 'E',
@@ -22,6 +27,22 @@ return {
 
     },
     link : function(scope,element ,attrs){}
+
+
+}
+});
+app.directive('matchedtile', function(){
+return {
+    restrict: 'E',
+    templateUrl: './templates/matchedTile.html',
+    controller: function($scope){
+
+    },
+    link : function(scope,element ,attrs){
+
+
+
+    }
 
 
 }
@@ -83,7 +104,34 @@ app.config(function($routeProvider){
 
 
 });*/
-
+/*
+app.factory('socket', function ($rootScope) {
+  var socket = io.connect();
+  return {
+    connect : function(url){
+        io(url);
+    },
+    on: function (eventName, callback) {
+      socket.on(eventName, function () {  
+        var args = arguments;
+        $rootScope.$apply(function () {
+          callback.apply(socket, args);
+        });
+      });
+    },
+    emit: function (eventName, data, callback) {
+      socket.emit(eventName, data, function () {
+        var args = arguments;
+        $rootScope.$apply(function () {
+          if (callback) {
+            callback.apply(socket, args);
+          }
+        });
+      })
+    }
+  };
+});
+*/
    app.config(function($stateProvider, $urlRouterProvider,$locationProvider){
    
      
@@ -117,8 +165,9 @@ app.config(function($routeProvider){
         })          
          $urlRouterProvider.otherwise("/games");
     })
-   
-app.filter('inGame',inGamefilter);   
+app.filter('createdByMe',createdByMe);
+app.filter('inGame',inGamefilter); 
+app.filter('playerMatchedTile',playerMatchedTile);     
 app.factory('GameFactory',gameFactory);
 app.factory('TileFactory',tileFactory);
 app.controller('BoardController', boardController);

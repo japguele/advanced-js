@@ -24,6 +24,10 @@ module.exports = function($http,$window){
 
                 $http.post("https://mahjongmayhem.herokuapp.com/Games/"+  game.id + "/Players", {})
                 .success(function(data, status, headers, config) {
+                   // socket.connect("http://mahjongmayhem.herokuapp.com?gameId=" + game.id);
+
+
+
                 console.log('success', data, status);
             }).error(function(data, status, headers, config) {
                 console.log('error', data, status);
@@ -51,13 +55,33 @@ module.exports = function($http,$window){
         
     }
 
-    factory.removeSelfFromGame = function(){
-	
-	}
+
         
 
 
+    factory.createGame = function(layout,minplayers,maxPlayers){
+        console.log({
+                "maxPlayers": 2 ,
+                "minPlayers": 1 ,
+                "templateName": "ox"
+            });
+          $http.post("https://mahjongmayhem.herokuapp.com/Games/", 
+            {
+                "maxPlayers": maxPlayers ,
+                "minPlayers": minplayers ,
+                "templateName": layout
+            })
+                .success(function(data, status, headers, config) {
+                console.log('success', data, status);
+                }).error(function(data, status, headers, config) {
+                    console.log(headers);
+                    console.log(config);
+                console.log('error', data, status);
+            }).catch(function(error){
+                console.log('catch', error);
+            });
 
+    }
     factory.getGame = function(gameid, callback) {
         $http.get("https://mahjongmayhem.herokuapp.com/Games/" + gameid)
             .then(function(res) {

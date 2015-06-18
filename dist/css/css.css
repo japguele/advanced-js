@@ -18,3 +18,10 @@
     color: #ff0000;
     border: 2px solid;
 }
+.boardmatchedtiles {
+    display:flex;
+    
+    overflow:auto;
+   
+
+}

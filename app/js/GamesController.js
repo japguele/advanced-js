@@ -10,8 +10,8 @@ module.exports = function($scope, GameFactory, $http, $q) {
     }
 
 
-    this.addGame = function(){
-        GameFactory.addGame(document.getElementById("layout").selected,{name :document.getElementById("name").value},document.getElementById("minplayers").value,document.getElementById("maxplayers").value);
+    this.createGame = function(){
+        GameFactory.createGame(document.getElementById("layout").selected,document.getElementById("min"),document.getElementById("max"))
     
     };
     this.joinGame = function(gameid){
@@ -23,14 +23,22 @@ module.exports = function($scope, GameFactory, $http, $q) {
         });
        
     }
+    this.startGame = function(gameid){
+
+        $http.post("https://mahjongmayhem.herokuapp.com/Games/"+  gameid + "/Start", {})
+                .success(function(data, status, headers, config) {
+                console.log('success', data, status);
+                }).error(function(data, status, headers, config) {
+                console.log('error', data, status);
+            }).catch(function(error){
+                console.log('catch', error);
+            });
+        
+
+    }
         
 
    
-
-    this.leaveGame = function(index) {
-        GameFactory.removePlayerFromGame(index, document.getElementById("tempid").value);
-        this.joinedGame = false;
-    }
 
     this.getGames = function() {
         GameFactory.getGames(function(res) {
