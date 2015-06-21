@@ -1,16 +1,20 @@
-module.exports = function($scope, TileFactory, GameFactory, $stateParams) {
+module.exports = function($scope, TileFactory, GameFactory, $stateParams,$http) {
     var scope = this;
     this.gameId = $stateParams.gameid;
 
-    this.tiles = {};
+    this.unmatchedTiles = {};
+    this.matchedTiles = {}
 
     this.init = function() {
         scope.game = GameFactory.getGame(this.gameId, function(res){
             scope.game = res.data;
         });
 
-        TileFactory.getTiles(this.gameId, function(res) {
-            scope.tiles = res;
+        TileFactory.getTiles(this.gameId, "false" ,function(res) {
+            scope.unmatchedTiles = res;
+        });
+        TileFactory.getTiles(this.gameId, "true" ,function(res) {
+            scope.matchedTiles = res;
         });
     }
 
@@ -32,6 +36,18 @@ module.exports = function($scope, TileFactory, GameFactory, $stateParams) {
                     if (isMatch == true) {
                         console.log("Een match!");
                         // HIER DE MATCH POSTEN MET TILE 'selectedTile' en 'tile'
+                        $http.post("https://mahjongmayhem.herokuapp.com/Games/"+  $stateParams.gameid + "/Tiles/matches", 
+                        { 
+                            "tile1Id": selectedTile._id ,
+                            "tile2Id": tile._id
+                        })
+                        .success(function(data, status, headers, config) {
+                            console.log('success', data, status);
+                        }).error(function(data, status, headers, config) {
+                            console.log('error', data, status);
+                        }).catch(function(error){
+                            console.log('catch', error);
+                        });
                     } else {
                         selectedTile.selected = false;
                         selectedTile = null;
@@ -47,7 +63,7 @@ module.exports = function($scope, TileFactory, GameFactory, $stateParams) {
     }
 
     $scope.checkSelectableTile = function(tile) {
-        var allTiles = scope.tiles;
+        var allTiles = scope.unmatchedTiles;
 
         var detectedTilesRight = [];
         var detectedTilesLeft = [];
