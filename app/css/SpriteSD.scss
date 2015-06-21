@@ -1,0 +1,52 @@
+$bamboo-start-position : 0;
+$character-start-position : 867;
+$circle-start-position : 1735;
+
+@mixin sprite-position($left, $top) {
+    background-position: $left+px $top+px;
+}
+ 
+.tile {
+    background-image: url('../images/SpriteSD.png');
+    background-repeat: no-repeat;
+    position:absolute;
+    width:70px;
+    height:96px;
+    background-size:70px;
+
+    .overlay {
+        width:100%;
+        height:100%;
+
+        &.selected {
+            background-image: url('../images/overlay.png');
+            background-size: 70px;
+        }
+    }
+
+    // Sprite
+
+    &.Bamboo {
+        @for $i from 1 through 9 {
+            &.Bamboo-#{$i} {
+                @include sprite-position(0, -($bamboo-start-position + ($i * 96) - 96));
+            }
+        }
+    }
+
+    &.Character {
+        @for $i from 1 through 9 {
+            &.Character-#{$i} {
+                @include sprite-position(0, -($character-start-position + ($i * 96) - 96));
+            }
+        }
+    }
+
+    &.Circle {
+        @for $i from 1 through 9 {
+            &.Circle-#{$i} {
+                @include sprite-position(0, -($circle-start-position + ($i * 96) - 96));
+            }
+        }
+    }
+}

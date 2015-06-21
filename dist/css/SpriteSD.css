@@ -1,0 +1,99 @@
+.tile {
+  background-image: url("../images/SpriteSD.png");
+  background-repeat: no-repeat;
+  position: absolute;
+  width: 70px;
+  height: 96px;
+  background-size: 70px;
+}
+.tile .overlay {
+  width: 100%;
+  height: 100%;
+}
+.tile .overlay.selected {
+  background-image: url("../images/overlay.png");
+  background-size: 70px;
+}
+.tile.Bamboo.Bamboo-1 {
+  background-position: 0px 0px;
+}
+.tile.Bamboo.Bamboo-2 {
+  background-position: 0px -96px;
+}
+.tile.Bamboo.Bamboo-3 {
+  background-position: 0px -192px;
+}
+.tile.Bamboo.Bamboo-4 {
+  background-position: 0px -288px;
+}
+.tile.Bamboo.Bamboo-5 {
+  background-position: 0px -384px;
+}
+.tile.Bamboo.Bamboo-6 {
+  background-position: 0px -480px;
+}
+.tile.Bamboo.Bamboo-7 {
+  background-position: 0px -576px;
+}
+.tile.Bamboo.Bamboo-8 {
+  background-position: 0px -672px;
+}
+.tile.Bamboo.Bamboo-9 {
+  background-position: 0px -768px;
+}
+.tile.Character.Character-1 {
+  background-position: 0px -867px;
+}
+.tile.Character.Character-2 {
+  background-position: 0px -963px;
+}
+.tile.Character.Character-3 {
+  background-position: 0px -1059px;
+}
+.tile.Character.Character-4 {
+  background-position: 0px -1155px;
+}
+.tile.Character.Character-5 {
+  background-position: 0px -1251px;
+}
+.tile.Character.Character-6 {
+  background-position: 0px -1347px;
+}
+.tile.Character.Character-7 {
+  background-position: 0px -1443px;
+}
+.tile.Character.Character-8 {
+  background-position: 0px -1539px;
+}
+.tile.Character.Character-9 {
+  background-position: 0px -1635px;
+}
+.tile.Circle.Circle-1 {
+  background-position: 0px -1735px;
+}
+.tile.Circle.Circle-2 {
+  background-position: 0px -1831px;
+}
+.tile.Circle.Circle-3 {
+  background-position: 0px -1927px;
+}
+.tile.Circle.Circle-4 {
+  background-position: 0px -2023px;
+}
+.tile.Circle.Circle-5 {
+  background-position: 0px -2119px;
+}
+.tile.Circle.Circle-6 {
+  background-position: 0px -2215px;
+}
+.tile.Circle.Circle-7 {
+  background-position: 0px -2311px;
+}
+.tile.Circle.Circle-8 {
+  background-position: 0px -2407px;
+}
+.tile.Circle.Circle-9 {
+  background-position: 0px -2503px;
+}
+
+/*# sourceMappingURL=SpriteSD.css.map */

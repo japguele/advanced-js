@@ -9,8 +9,9 @@ var gamesController = require('./GamesController');
 var gameFactory = require('./GameFactory');
 var roomController = require('./RoomController');
 var boardController = require('./BoardController');
-var tileFactory =  require('./TileFactory')
-var app = angular.module('app', ['ui.router'])
+var tileFactory =  require('./TileFactory');
+var appController = require('./AppController');
+var app = angular.module('app', ['ui.router']);
 
 
 app.directive('tile', function(){
@@ -81,7 +82,7 @@ app.config(function($routeProvider){
     })
 app.factory('GameFactory',gameFactory);
 app.factory('TileFactory',tileFactory);
+app.controller('AppController', appController);
 app.controller('BoardController', boardController);
 app.controller('GamesController' , gamesController);
 app.controller('RoomController' , roomController);
-
