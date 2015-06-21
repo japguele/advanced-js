@@ -1,4 +1,4 @@
-	module.exports = function($window) {
+module.exports = function($window) {
 			return function(items,bool) {
    		 	var filtered = [];
     		angular.forEach(items, function(item) {
@@ -19,6 +19,4 @@
     		});
     		return filtered;
   };
- }
-
-
+}

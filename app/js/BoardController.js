@@ -127,7 +127,7 @@ module.exports = function($scope, TileFactory, GameFactory, $stateParams,$http) 
     $scope.checkForPossibleMoves = function() {
         var movePossible = false;
 
-        var allTiles = scope.tiles;
+        var allTiles = scope.unmatchedTiles;
         var allSelectableTiles = [];
         var allCombinations = [];
 
