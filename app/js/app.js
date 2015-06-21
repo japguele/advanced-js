@@ -17,8 +17,9 @@ var playerMatchedTile = require('../filters/PlayerMatchedTile');
 var createdByMe = require('../filters/CreatedByMe');
 
 
-//var io = require('socket.io').listen(httpServer);
-//io.use(sharedsession(session));
+
+
+
 app.directive('tile', function(){
 return {
     restrict: 'E',
@@ -104,34 +105,8 @@ app.config(function($routeProvider){
 
 
 });*/
-/*
-app.factory('socket', function ($rootScope) {
-  var socket = io.connect();
-  return {
-    connect : function(url){
-        io(url);
-    },
-    on: function (eventName, callback) {
-      socket.on(eventName, function () {  
-        var args = arguments;
-        $rootScope.$apply(function () {
-          callback.apply(socket, args);
-        });
-      });
-    },
-    emit: function (eventName, data, callback) {
-      socket.emit(eventName, data, function () {
-        var args = arguments;
-        $rootScope.$apply(function () {
-          if (callback) {
-            callback.apply(socket, args);
-          }
-        });
-      })
-    }
-  };
-});
-*/
+
+
    app.config(function($stateProvider, $urlRouterProvider,$locationProvider){
    
      

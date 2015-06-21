@@ -1,16 +1,9 @@
 
 module.exports = function($http,$window){
-
-
+    
     var factory = {};
 
-
-        
-    
-
     factory.addSelfTogame = function(game){
-        alert("https://mahjongmayhem.herokuapp.com/Games/"+ game.id + "/Players");
-    
        if($window.sessionStorage.username) {
         if(game.players.length < game.maxPlayers){
             var didJoin = false;
@@ -55,31 +48,16 @@ module.exports = function($http,$window){
         
     }
 
+    factory.createGame = function(layout,minplayers,maxPlayers,callback){
 
-        
-
-
-    factory.createGame = function(layout,minplayers,maxPlayers){
-        console.log({
-                "maxPlayers": 2 ,
-                "minPlayers": 1 ,
-                "templateName": "ox"
-            });
           $http.post("https://mahjongmayhem.herokuapp.com/Games/", 
             {
                 "maxPlayers": maxPlayers ,
                 "minPlayers": minplayers ,
                 "templateName": layout
-            })
-                .success(function(data, status, headers, config) {
-                console.log('success', data, status);
-                }).error(function(data, status, headers, config) {
-                    console.log(headers);
-                    console.log(config);
-                console.log('error', data, status);
-            }).catch(function(error){
-                console.log('catch', error);
-            });
+            }).then(function(status){
+                callback(status);
+            })           
 
     }
     factory.getGame = function(gameid, callback) {

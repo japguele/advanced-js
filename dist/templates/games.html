@@ -88,8 +88,7 @@
                             </div>
                         </td>
                         <td>{{ game.state }}</td>
-                        <td><button class="button" ng-click="games.joinGame(game.id)" ng-show="!games.joinedGame">Join Game</button></td>
-                        <td><button ng-click="games.leaveGame(game.id)" ng-show="games.joinedGame">Leave Game</button></td>
+                        <td><button class="button" ng-click="games.joinGame(game.id)">Join Game</button></td>
                     </tr>
                 </tbody>
             </table>
@@ -138,22 +137,22 @@
         <h1>Maak een game</h1>
     </div>
     <div class="row">
-        <form>
+        <form ng-submit="games.createGame(gameData)">
             <label>layout</label>
-            <select id="layout">
-                <option value="shanghai">shanghai</option>
-                <option value="snake">snake</option>
-                <option value="ox">ox</option>
-                <option value="ram">ram</option>    
-                <option value="dragon">dragon</option>
-                <option value="rooster">rooster</option>
-                <option value="monkey">monkey</option>
+            <select  ng-model="gameData.layout">
+                <option value="Shanghai">Shanghai</option>
+                <option value="Snake">Snake</option>
+                <option value="Ox">Ox</option>
+                <option value="Ram">Ram</option>    
+                <option value="Dragon">Dragon</option>
+                <option value="Rooster">Rooster</option>
+                <option value="Monkey">Monkey</option>
             </select> <br/>
             <label> minplayers </label>
-            <input id="minplayers" type="text"/> <br/>
+            <input  ng-model="gameData.min" type="text"/> <br/>
             <label> maxplayers </label>
-            <input id="maxplayers" type="text"/>
-            <input type="submit" value="submit" ng-click="games.createGame();" />
+            <input  ng-model="gameData.max" type="text"/>
+            <input type="submit" value="submit"/>
         </form>
     </div>
     <!-- Einde game aanmaken -->
