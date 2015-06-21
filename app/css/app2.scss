@@ -34,7 +34,14 @@ $background: #fff;
     }
 }
 
-
 .board {
     position: relative;
+}
+
+.matchedtiles {
+    position: relative;
+
+    .matchedtilecontainer {
+        display:inline-block;
+    }
 }

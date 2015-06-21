@@ -6,7 +6,7 @@ $circle-start-position : 1735;
     background-position: $left+px $top+px;
 }
  
-.tile {
+.tile, .matchedtile {
     background-image: url('../images/SpriteSD.png');
     background-repeat: no-repeat;
     position:absolute;
@@ -22,6 +22,12 @@ $circle-start-position : 1735;
             background-image: url('../images/overlay.png');
             background-size: 70px;
         }
+    }
+
+    &.matched {
+        position:relative!important;
+        display:inline-block;
+        margin:10px;
     }
 
     // Sprite

@@ -3,13 +3,15 @@ module.exports = function($scope, TileFactory, GameFactory, $stateParams,$http) 
     this.gameId = $stateParams.gameid;
 
     this.unmatchedTiles = {};
-    this.matchedTiles = {}
+    this.matchedTiles = {};
+
+    var selectedTile = null;
 
     this.init = function() {
 
         var socket = require('./socket')($scope, $stateParams.gameid);
         
-       socket.on("match",function(res){
+        socket.on("match",function(res){
             console.log(res);
             var index = scope.unmatchedTiles.indexOf(res[0]);
             if (index > -1) {
@@ -20,6 +22,7 @@ module.exports = function($scope, TileFactory, GameFactory, $stateParams,$http) 
                 scope.matchedTiles.push(array.splice(index, 1));
             }              
         });
+
         socket.on("end",function(res){
             alert("The game has Ended");            
         });
@@ -35,8 +38,6 @@ module.exports = function($scope, TileFactory, GameFactory, $stateParams,$http) 
             scope.matchedTiles = res;
         });
     }
-
-    var selectedTile = null;
 
     $scope.selectTile = function(tile) {
 
@@ -55,14 +56,11 @@ module.exports = function($scope, TileFactory, GameFactory, $stateParams,$http) 
                         console.log("Een match!");
                         // HIER DE MATCH POSTEN MET TILE 'selectedTile' en 'tile'
                         $http.post("https://mahjongmayhem.herokuapp.com/Games/"+  $stateParams.gameid + "/Tiles/matches", 
-
                         { 
                             "tile1Id": selectedTile._id ,
                             "tile2Id": tile._id
                         })
                         .success(function(data, status, headers, config) {
-
-                                                    
                             scope.unmatchedTiles.splice(scope.unmatchedTiles.indexOf(selectedTile),1)
                             scope.unmatchedTiles.splice(scope.unmatchedTiles.indexOf(tile),1)
 
@@ -125,7 +123,6 @@ module.exports = function($scope, TileFactory, GameFactory, $stateParams,$http) 
         return selectable;
     }
 
-
     $scope.matchTiles = function(tile1, tile2, showinfo) {
         var isMatch = false;
 
@@ -152,7 +149,6 @@ module.exports = function($scope, TileFactory, GameFactory, $stateParams,$http) 
 
         return isMatch;
     }
-
 
     $scope.checkForPossibleMoves = function() {
         var movePossible = false;
@@ -189,4 +185,4 @@ module.exports = function($scope, TileFactory, GameFactory, $stateParams,$http) 
 
         return movePossible;
     }
-};
+}

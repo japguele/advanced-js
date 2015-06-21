@@ -31,15 +31,16 @@
             </table>
         </div>
     </div>
-    <div ng-repeat="player in board.game.players">
-        <h2> {{ player.name }} </h2>
-        <div style="display:flex;overflow:auto;">
-            <div ng-repeat="tile in board.matchedTiles | playerMatchedTile : player._id ">
+    <div class="matchedtiles">
+        <div ng-repeat="player in board.game.players">
+            <h2>Matched tiles - {{ player.name }}  </h2>
+            <div class="matchedtilecontainer" ng-repeat="tile in board.matchedTiles | playerMatchedTile : player._id">
                 <matchedtile></matchedtile>
             </div>
         </div>
     </div>
     <div class="board">
+        <h2>Board</h2>
 	    <div ng-repeat="tile in board.unmatchedTiles track by $index ">
 	        <tile></tile>
 	    </div>

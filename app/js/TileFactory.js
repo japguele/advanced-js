@@ -8,9 +8,7 @@ module.exports = function($http) {
             .then(function(res) {
                 callback(res.data);
             });
-        
     }
-
     
     factory.returnTiles = function() {
         return factory.Tiles;
@@ -19,7 +17,6 @@ module.exports = function($http) {
     factory.getSelectedTile = function() {
         return factory.selectedTile;
     }
-    
 
     return factory;
 }

@@ -1,39 +1,24 @@
-describe("GamesFactory", function() {
+describe("GameFactory", function() {
 	
 	// initialize the app
 	beforeEach(module('myApp'));
-	var GamesFactory;
+	var GameFactory;
 	// Inject the modules and get them in global variables
 	beforeEach(inject(function($rootScope, $controller, $httpBackend, $injector){
 		// The scope for the controller
 		scope = $rootScope.$new();
 		// Get the service which will be injected
-		GamesFactory = $injector.get('GamesFactory');
-		// For mocking the backend
-		
-		// Stubbing with sinon
-	
+		GameFactory = $injector.get('GameFactory');	
 	}));
 
-	it('should create Game', function(){
-		// Given
+	it('should get Games', function(){
 
-		var person = {name : "jaapie"}
-		var layout = "snake"
-		var createdBy = "jaapie"
-		var minPlayers = "1"
-		var maxPlayers = "5"
-		
-		// Nu expecten we het omdat we in de test zitten.
-		// Bij de before of beforeEach kunnen we ook whenPost stubben
-		GamesFactory.addGame(layout, createdBy,minPlayers,maxPlayers)
+		var games = GameFactory.getGames();
 
 		// When
-		
 		httpBackend.flush(); // Voer synchroon uit ipv asynchroon
 
 		// Then
-		expect(scope.error).to.equal(expectedError);
-		expect(GamesFactory.Games).to.not.have.length(0);
+		expect(games).to.not.have.length(0);
 	});
 });

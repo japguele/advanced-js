@@ -82,7 +82,7 @@
                     <tbody>
                         <tr>
                             <td>
-                                <select id="layout">
+                                <select ng-model="gameData.layout">
                                     <option value="shanghai">Shanghai</option>
                                     <option value="snake">Snake</option>
                                     <option value="ox">Ox</option>
@@ -93,13 +93,13 @@
                                 </select>
                             </td>
                             <td>
-                                <input id="minplayers" type="text" />
+                                <input ng-model="gameData.min" type="text" />
                             </td>
                             <td>
-                                <input id="maxplayers" type="text" />
+                                <input ng-model="gameData.max" type="text" />
                             </td>
                             <td>
-                                <input type="submit" value="submit" ng-click="games.createGame();" />
+                                <input type="submit" value="submit" ng-click="games.createGame(gameData);" />
                             </td>
                         </tr>
                     </tbody>
@@ -137,16 +137,12 @@
                             </div>
                         </td>
                         <td>{{ game.state }}</td>
-<<<<<<< HEAD
-                        <td><button class="button" ng-click="games.joinGame(game.id)">Join Game</button></td>
-=======
                         <td>
                             <button class="button" ng-click="games.joinGame(game.id)" ng-show="!games.joinedGame">Join Game</button>
                         </td>
                         <td>
                             <button ng-click="games.leaveGame(game.id)" ng-show="games.joinedGame">Leave Game</button>
                         </td>
->>>>>>> origin/master
                     </tr>
                 </tbody>
             </table>
@@ -187,33 +183,4 @@
             </table>
         </div>
     </div>
-<<<<<<< HEAD
     <!-- Einde game bekijken -->
-    <!-- Begin game aanmaken -->
-    <div class="page-header">
-        <h1>Maak een game</h1>
-    </div>
-    <div class="row">
-        <form ng-submit="games.createGame(gameData)">
-            <label>layout</label>
-            <select  ng-model="gameData.layout">
-                <option value="Shanghai">Shanghai</option>
-                <option value="Snake">Snake</option>
-                <option value="Ox">Ox</option>
-                <option value="Ram">Ram</option>    
-                <option value="Dragon">Dragon</option>
-                <option value="Rooster">Rooster</option>
-                <option value="Monkey">Monkey</option>
-            </select> <br/>
-            <label> minplayers </label>
-            <input  ng-model="gameData.min" type="text"/> <br/>
-            <label> maxplayers </label>
-            <input  ng-model="gameData.max" type="text"/>
-            <input type="submit" value="submit"/>
-        </form>
-    </div>
-    <!-- Einde game aanmaken -->
-
-=======
-    <!-- Einde game bekijken -->
->>>>>>> origin/master
