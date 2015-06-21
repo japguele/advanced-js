@@ -1,6 +1,12 @@
+$tile-height : 96.27507163323782;
+
 $bamboo-start-position : 0;
-$character-start-position : 867;
-$circle-start-position : 1735;
+$character-start-position : $tile-height * 9;
+$circle-start-position : $tile-height * 18;
+$dragon-start-position : $tile-height * 27;
+$flower-start-position : $tile-height * 30;
+$season-start-position : $tile-height * 34;
+$wind-start-position : $tile-height * 38;
 
 @mixin sprite-position($left, $top) {
     background-position: $left+px $top+px;
@@ -35,7 +41,7 @@ $circle-start-position : 1735;
     &.Bamboo {
         @for $i from 1 through 9 {
             &.Bamboo-#{$i} {
-                @include sprite-position(0, -($bamboo-start-position + ($i * 96) - 96));
+                @include sprite-position(0, -($bamboo-start-position + ($i * $tile-height) - $tile-height));
             }
         }
     }
@@ -43,7 +49,7 @@ $circle-start-position : 1735;
     &.Character {
         @for $i from 1 through 9 {
             &.Character-#{$i} {
-                @include sprite-position(0, -($character-start-position + ($i * 96) - 96));
+                @include sprite-position(0, -($character-start-position + ($i * $tile-height) - $tile-height));
             }
         }
     }
@@ -51,7 +57,51 @@ $circle-start-position : 1735;
     &.Circle {
         @for $i from 1 through 9 {
             &.Circle-#{$i} {
-                @include sprite-position(0, -($circle-start-position + ($i * 96) - 96));
+                @include sprite-position(0, -($circle-start-position + ($i * $tile-height) - $tile-height));
+            }
+        }
+    }
+
+    &.Dragon {
+        $dragons-list: Green Red White;
+
+        @each $current-dragon in $dragons-list {
+            $i: index($dragons-list, $current-dragon);
+            &.Dragon-#{$current-dragon} {
+                @include sprite-position(0, -($dragon-start-position + ($i * $tile-height) - $tile-height));
+            }
+        }
+    }
+
+    &.Flower {
+        $flowers-list: Bamboo Chrysantememum Orchid Plum;
+
+        @each $current-flower in $flowers-list {
+            $i: index($flowers-list, $current-flower);
+            &.Flower-#{$current-flower} {
+                @include sprite-position(0, -($flower-start-position + ($i * $tile-height) - $tile-height));
+            }
+        }
+    }
+
+    &.Season {
+        $seasons-list: Autumn Spring Summer Winter;
+
+        @each $current-season in $seasons-list {
+            $i: index($seasons-list, $current-season);
+            &.Season-#{$current-season} {
+                @include sprite-position(0, -($season-start-position + ($i * $tile-height) - $tile-height));
+            }
+        }
+    }
+
+    &.Wind {
+        $wind-list: East North South West;
+
+        @each $current-wind in $wind-list {
+            $i: index($wind-list, $current-wind);
+            &.Wind-#{$current-wind} {
+                @include sprite-position(0, -($wind-start-position + ($i * $tile-height) - $tile-height));
             }
         }
     }

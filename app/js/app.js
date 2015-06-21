@@ -24,8 +24,6 @@ app.directive('tile', function() {
 
         },
         link: function(scope, element, attrs) {}
-
-
     }
 });
 
