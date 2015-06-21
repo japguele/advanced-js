@@ -6,6 +6,7 @@ module.exports = function($scope, TileFactory, GameFactory, $stateParams,$http) 
     this.matchedTiles = {}
 
     this.init = function() {
+
         var socket = require('./socket')($scope, $stateParams.gameid);
         
        socket.on("match",function(res){
@@ -23,7 +24,6 @@ module.exports = function($scope, TileFactory, GameFactory, $stateParams,$http) 
             alert("The game has Ended");            
         });
 
-
         scope.game = GameFactory.getGame(this.gameId, function(res){
             scope.game = res.data;
         });
@@ -39,44 +39,45 @@ module.exports = function($scope, TileFactory, GameFactory, $stateParams,$http) 
     var selectedTile = null;
 
     $scope.selectTile = function(tile) {
-        var selectable = this.checkSelectableTile(tile);
 
-        if (selectable == true) {
-            if (selectedTile == null) {
-                tile.selected = true;
-                selectedTile = tile;
-            } else {
-                var isMatch = this.matchTiles(selectedTile, tile);
+        if($scope.checkForPossibleMoves()){
 
-                if (isMatch == true) {
-                            console.log("Een match!");             
-                            // HIER DE MATCH POSTEN MET TILE 'selectedTile' en 'tile'     
-                    $http.post("https://mahjongmayhem.herokuapp.com/Games/"+  $stateParams.gameid + "/Tiles/matches", 
+            var selectable = this.checkSelectableTile(tile);
+
+            if (selectable == true) {
+                if (selectedTile == null) {
+                    tile.selected = true;
+                    selectedTile = tile;
+                } else {
+                    var isMatch = this.matchTiles(selectedTile, tile);
+
+                    if (isMatch == true) {
+                        console.log("Een match!");
+                        // HIER DE MATCH POSTEN MET TILE 'selectedTile' en 'tile'
+                        $http.post("https://mahjongmayhem.herokuapp.com/Games/"+  $stateParams.gameid + "/Tiles/matches", 
+
                         { 
                             "tile1Id": selectedTile._id ,
                             "tile2Id": tile._id
-
-
                         })
-                .success(function(data, status, headers, config) {
-                console.log('success', data, status);
-            }).error(function(data, status, headers, config) {
-                console.log('error', data, status);
-            }).catch(function(error){
-                console.log('catch', error);
-            });
+                        .success(function(data, status, headers, config) {
+                            console.log('success', data, status);
+                        }).error(function(data, status, headers, config) {
+                            console.log('error', data, status);
+                        }).catch(function(error){
+                            console.log('catch', error);
+                        });
+                    } else {
+                        selectedTile.selected = false;
+                        selectedTile = null;
 
-
-
-                } else {
-                    selectedTile.selected = false;
-                    selectedTile = null;
-
-                    console.log("Dit is geen match!");
+                        console.log("Dit is geen match!");
+                    }
                 }
+            } else {
+                console.log("Deze tile kan niet geselecteerd worden.");
             }
-        } else {
-            console.log("Deze tile kan niet geselecteerd worden.");
+            $scope.checkForPossibleMoves();
         }
     }
 
@@ -105,15 +106,6 @@ module.exports = function($scope, TileFactory, GameFactory, $stateParams,$http) 
             }
         });
 
-        //console.log("Left:");
-        //console.log(detectedTilesLeft);
-        //console.log("Right:");
-        //console.log(detectedTilesRight);
-        //console.log("On Top:");
-        //console.log(detectedTilesOnTop);
-        //console.log("This tile:");
-        //console.log(tile);
-
         if (detectedTilesOnTop.length == 0) {
             if (detectedTilesRight.length == 0 || detectedTilesLeft.length == 0) {
                 selectable = true;
@@ -124,8 +116,7 @@ module.exports = function($scope, TileFactory, GameFactory, $stateParams,$http) 
     }
 
 
-
-    $scope.matchTiles = function(tile1, tile2) {
+    $scope.matchTiles = function(tile1, tile2, showinfo) {
         var isMatch = false;
 
         if (tile1 != tile2) {
@@ -134,22 +125,58 @@ module.exports = function($scope, TileFactory, GameFactory, $stateParams,$http) 
                     if (tile1.tile.name == tile2.tile.name) {
                         isMatch = true;
                     } else {
-                        console.log("Naast de suit moet bij deze tile ook de name overeen komen. Dit is niet het geval.");
+                        if(showinfo)
+                            console.log("Naast de suit moet bij deze tile ook de name overeen komen. Dit is niet het geval.");
                     }
                 } else {
                     isMatch = true;
                 }
             } else {
-                console.log("De suit komt niet overeen.");
+                if(showinfo)
+                    console.log("De suit komt niet overeen.");
             }
         } else {
-            console.log("Je kunt niet 2 dezelfde tiles matchen!");
+            if(showinfo)
+                console.log("Je kunt niet 2 dezelfde tiles matchen!");
         }
 
         return isMatch;
     }
 
 
+    $scope.checkForPossibleMoves = function() {
+        var movePossible = false;
 
-    this.checkForPossibleMoves = function() {}
+        var allTiles = scope.tiles;
+        var allSelectableTiles = [];
+        var allCombinations = [];
+
+        allTiles.forEach(function(tile){
+            if($scope.checkSelectableTile(tile)){
+                allSelectableTiles.push(tile);
+            }
+        });
+
+
+        allSelectableTiles
+            .slice(0, allSelectableTiles.length - 1)
+            .forEach(function (first, n) {
+                var tail = allSelectableTiles.slice(n + 1, allSelectableTiles.length);
+                tail.forEach(function (item) {
+                    allCombinations.push([first, item]);
+                });
+        });
+
+        allCombinations.forEach(function(combination){
+            var match = $scope.matchTiles(combination[0], combination[1], false);
+            if(match){
+                movePossible = true;
+            }
+        });
+
+        if(!movePossible)
+            alert("Er is geen move meer mogelijk.");
+
+        return movePossible;
+    }
 };

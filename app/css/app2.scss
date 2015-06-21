@@ -1,0 +1,35 @@
+.navbar-inverse {
+    background-color:#fff;
+}
+
+#navbar {
+    a.navbar-brand {
+        color:#000;
+
+        &:hover {
+            color:#9d9d9d!important;
+        }
+    }  
+
+    ul {
+        li {
+            a {
+                color: #000;
+                &:hover {
+                    color:#9d9d9d;
+                }
+            }
+
+            &.active {
+                a {
+                    color:#fff;
+                }
+            }
+        }
+    }
+}
+
+
+.board {
+    position: relative;
+}

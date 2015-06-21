@@ -1,3 +1,4 @@
-<div class="tile" style="left : calc({{tile.xPos}} * 30px) ; top : calc({{tile.yPos}} * 60px - {{tile.zPos}} * 2px)" ng-click="selectTile(tile)" ng-class="{selected: tile.selected}">
-	suit : {{tile.tile.suit}} </br> number : {{tile.tile.name}}
+<div class="tile {{tile.tile.suit}} {{tile.tile.suit}}-{{tile.tile.name}}" style="left : calc({{tile.xPos}} * 33px - {{tile.zPos}} * 1px) ; top : calc({{tile.yPos}} * 48px - {{tile.zPos}} * 1px); z-index:{{tile.zPos}};">
+	<div class="overlay" ng-class="{selected: tile.selected}" ng-click="selectTile(tile)">
+	</div>
 </div>
