@@ -1,5 +1,5 @@
 <div ng-init="board.init()">
- 
+
 	<div class="page-header">
         <h1>Informatie over deze game</h1>
     </div>
@@ -33,7 +33,7 @@
     </div>
     <div ng-repeat="player in board.game.players">
         <h2> {{ player.name }} </h2>
-        <div class="boardmatchedtiles">
+        <div style="display:flex;overflow:auto;">
             <div ng-repeat="tile in board.matchedTiles | playerMatchedTile : player._id ">
                 <matchedtile></matchedtile>
             </div>
@@ -43,6 +43,5 @@
 	    <div ng-repeat="tile in board.unmatchedTiles track by $index ">
 	        <tile></tile>
 	    </div>
-
 	</div>
 </div>

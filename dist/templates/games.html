@@ -1,7 +1,6 @@
-
 <div ng-onLoad="games.init()">
     <!-- begin mijn games -->
-        <div class="page-header">
+    <div class="page-header">
         <h1>Mijn Games</h1>
     </div>
     <div class="row">
@@ -18,7 +17,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                     <tr ng-repeat="game in games.games | inGame : true  | filter: {state : 'playing'}">
+                    <tr ng-repeat="game in games.games | inGame : true  | filter: {state : 'playing'}">
                         <td>{{ game.id }}</td>
                         <td>{{ game.gameTemplate.id }}</td>
                         <td>{{ game.createdBy.name }}</td>
@@ -28,7 +27,9 @@
                             </div>
                         </td>
                         <td>{{ game.state }}</td>
-                        <td>   <div> <a class="button" href="#/games/{{game._id}}">Speel</a> </div> </td>
+                        <td>
+                            <div> <a class="button" href="#/games/{{game._id}}">Speel</a> </div>
+                        </td>
                     </tr>
                     <tr ng-repeat="game in games.games | inGame : true  | filter: {state : 'open'} | createdByMe : true">
                         <td>{{ game.id }}</td>
@@ -39,10 +40,13 @@
                                 Name : {{ player.name }}
                             </div>
                         </td>
-                        <td>{{ game.state }}</td> 
-                        <td><div> <button class="button" ng-click="games.startGame(game._id)">Start </button> </div>  </td>                   
-                    </tr>         
-
+                        <td>{{ game.state }}</td>
+                        <td>
+                            <div>
+                                <button class="button" ng-click="games.startGame(game._id)">Start </button>
+                            </div>
+                        </td>
+                    </tr>
                     <tr ng-repeat="game in games.games | inGame : true  | filter: {state : 'open'} | createdByMe : false ">
                         <td>{{ game.id }}</td>
                         <td>{{ game.gameTemplate.id }}</td>
@@ -52,13 +56,58 @@
                                 Name : {{ player.name }}
                             </div>
                         </td>
-                        <td>{{ game.state }}</td>                    
-                    </tr>                    
+                        <td>{{ game.state }}</td>
+                    </tr>
                 </tbody>
             </table>
         </div>
     </div>
     <!-- einde mijn games -->
+    <!-- Begin game aanmaken -->
+    <div class="page-header">
+        <h1>Maak nieuwe game aan</h1>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <form>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Layout</th>
+                            <th>Minplayers</th>
+                            <th>Maxplayers</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <select id="layout">
+                                    <option value="shanghai">Shanghai</option>
+                                    <option value="snake">Snake</option>
+                                    <option value="ox">Ox</option>
+                                    <option value="ram">Ram</option>
+                                    <option value="dragon">Dragon</option>
+                                    <option value="rooster">Rooster</option>
+                                    <option value="monkey">Monkey</option>
+                                </select>
+                            </td>
+                            <td>
+                                <input id="minplayers" type="text" />
+                            </td>
+                            <td>
+                                <input id="maxplayers" type="text" />
+                            </td>
+                            <td>
+                                <input type="submit" value="submit" ng-click="games.createGame();" />
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </form>
+        </div>
+    </div>
+    <!-- Einde game aanmaken -->
     <!-- Begin game joinen -->
     <div class="page-header">
         <h1>Join een game</h1>
@@ -88,15 +137,22 @@
                             </div>
                         </td>
                         <td>{{ game.state }}</td>
+<<<<<<< HEAD
                         <td><button class="button" ng-click="games.joinGame(game.id)">Join Game</button></td>
+=======
+                        <td>
+                            <button class="button" ng-click="games.joinGame(game.id)" ng-show="!games.joinedGame">Join Game</button>
+                        </td>
+                        <td>
+                            <button ng-click="games.leaveGame(game.id)" ng-show="games.joinedGame">Leave Game</button>
+                        </td>
+>>>>>>> origin/master
                     </tr>
                 </tbody>
             </table>
         </div>
     </div>
     <!-- Einde game joinen -->
-
-
     <!-- Begin game bekijken -->
     <div class="page-header">
         <h1>Bekijk een game</h1>
@@ -131,6 +187,7 @@
             </table>
         </div>
     </div>
+<<<<<<< HEAD
     <!-- Einde game bekijken -->
     <!-- Begin game aanmaken -->
     <div class="page-header">
@@ -157,3 +214,6 @@
     </div>
     <!-- Einde game aanmaken -->
 
+=======
+    <!-- Einde game bekijken -->
+>>>>>>> origin/master
