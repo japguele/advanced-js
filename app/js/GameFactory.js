@@ -1,6 +1,10 @@
 
 module.exports = function($http,$window){
+<<<<<<< HEAD
     
+=======
+
+>>>>>>> origin/master
     var factory = {};
 
     factory.addSelfTogame = function(game){
@@ -18,9 +22,6 @@ module.exports = function($http,$window){
                 $http.post("https://mahjongmayhem.herokuapp.com/Games/"+  game.id + "/Players", {})
                 .success(function(data, status, headers, config) {
                    // socket.connect("http://mahjongmayhem.herokuapp.com?gameId=" + game.id);
-
-
-
                 console.log('success', data, status);
             }).error(function(data, status, headers, config) {
                 console.log('error', data, status);
@@ -38,28 +39,31 @@ module.exports = function($http,$window){
        }else{
         alert("u ben niet ingelogd");
        }
-
-
-        
-
-
-
-       
         
     }
 
+<<<<<<< HEAD
     factory.createGame = function(layout,minplayers,maxPlayers,callback){
 
+=======
+    factory.createGame = function(layout,minPlayers,maxPlayers){
+        console.log({
+                "maxPlayers": maxPlayers ,
+                "minPlayers": minPlayers ,
+                "templateName": layout
+            });
+>>>>>>> origin/master
           $http.post("https://mahjongmayhem.herokuapp.com/Games/", 
             {
                 "maxPlayers": maxPlayers ,
-                "minPlayers": minplayers ,
+                "minPlayers": minPlayers ,
                 "templateName": layout
             }).then(function(status){
                 callback(status);
             })           
 
     }
+    
     factory.getGame = function(gameid, callback) {
         $http.get("https://mahjongmayhem.herokuapp.com/Games/" + gameid)
             .then(function(res) {
