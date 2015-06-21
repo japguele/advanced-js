@@ -61,7 +61,17 @@ module.exports = function($scope, TileFactory, GameFactory, $stateParams,$http) 
                             "tile2Id": tile._id
                         })
                         .success(function(data, status, headers, config) {
+
+                                                    
+                            scope.unmatchedTiles.splice(scope.unmatchedTiles.indexOf(selectedTile),1)
+                            scope.unmatchedTiles.splice(scope.unmatchedTiles.indexOf(tile),1)
+
+                            TileFactory.getTiles($stateParams.gameid,true,function(tiles){
+                                scope.matchedTiles = tiles;
+                            })
+
                             console.log('success', data, status);
+
                         }).error(function(data, status, headers, config) {
                             console.log('error', data, status);
                         }).catch(function(error){
@@ -147,7 +157,7 @@ module.exports = function($scope, TileFactory, GameFactory, $stateParams,$http) 
     $scope.checkForPossibleMoves = function() {
         var movePossible = false;
 
-        var allTiles = scope.tiles;
+        var allTiles = scope.unmatchedTiles;
         var allSelectableTiles = [];
         var allCombinations = [];
 
