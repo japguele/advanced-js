@@ -9,7 +9,6 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "socket.io": "*",
     "angular": "^1.3.16",
     "angular-mocks": "^1.3.15",
     "angular-route": "~1.3.0",
@@ -27,11 +26,16 @@
     "karma": "^0.12.31",
     "karma-browserify": "^4.1.2",
     "karma-chai": "^0.1.0",
-    "karma-coverage": "^0.2.6",
+    "karma-chrome-launcher": "~0.1",
+    "karma-coverage": "0.2.6",
     "karma-firefox-launcher": "~0.1",
+    "karma-jasmine": "^0.3.5",
     "karma-mocha": "^0.1.10",
+    "karma-script-launcher": "~0.1.0",
+    "karma-html2js-preprocessor": "~0.1.0",
     "karma-sinon": "^1.0.4",
     "mocha": "^2.2.1",
-    "sinon": "^1.14.1"
+    "sinon": "^1.14.1",
+    "socket.io": "*"
   }
 }

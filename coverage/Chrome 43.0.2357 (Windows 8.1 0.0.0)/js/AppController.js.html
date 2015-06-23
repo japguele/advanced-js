@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for js\AppController.js</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="../prettify.css">
+    <link rel="stylesheet" href="../base.css">
+    <style type='text/css'>
+        div.coverage-summary .sorter {
+            background-image: url(../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class="header low">
+    <h1>Code coverage report for <span class="entity">js\AppController.js</span></h1>
+    <h2>
+        Statements: <span class="metric">4.17% <small>(1 / 24)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Branches: <span class="metric">0% <small>(0 / 12)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Functions: <span class="metric">0% <small>(0 / 5)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Lines: <span class="metric">4.17% <small>(1 / 24)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Ignored: <span class="metric"><span class="ignore-none">none</span></span> &nbsp;&nbsp;&nbsp;&nbsp;
+    </h2>
+    <div class="path"><a href="../index.html">All files</a> &#187; <a href="index.html">js/</a> &#187; AppController.js</div>
+</div>
+<div class="body">
+<pre><table class="coverage">
+<tr><td class="line-count">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49</td><td class="line-coverage"><span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">module.exports = <span class="fstat-no" title="function not covered" >function($scope, $stateParams) {</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    var style_cookie_name = "style";</span>
+<span class="cstat-no" title="statement not covered" >    var style_cookie_duration = 30;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    $scope.switch_style = <span class="fstat-no" title="function not covered" >function(css_title) {</span></span>
+<span class="cstat-no" title="statement not covered" >        var i, link_tag;</span>
+<span class="cstat-no" title="statement not covered" >        for (i = 0, link_tag = document.getElementsByTagName("link"); i &lt; link_tag.length; i++) {</span>
+<span class="cstat-no" title="statement not covered" >            if ((link_tag[i].rel.indexOf("stylesheet") != -1) &amp;&amp;</span>
+                link_tag[i].title) {
+<span class="cstat-no" title="statement not covered" >                link_tag[i].disabled = true;</span>
+<span class="cstat-no" title="statement not covered" >                if (link_tag[i].title == css_title) {</span>
+<span class="cstat-no" title="statement not covered" >                    link_tag[i].disabled = false;</span>
+                }
+            }
+<span class="cstat-no" title="statement not covered" >            $scope.set_cookie(style_cookie_name, css_title, style_cookie_duration);</span>
+        }
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    $scope.set_style_from_cookie = <span class="fstat-no" title="function not covered" >function() {</span></span>
+<span class="cstat-no" title="statement not covered" >        var css_title = get_cookie(style_cookie_name);</span>
+<span class="cstat-no" title="statement not covered" >        if (css_title.length) {</span>
+<span class="cstat-no" title="statement not covered" >            switch_style(css_title);</span>
+        }
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    $scope.set_cookie = <span class="fstat-no" title="function not covered" >function(cookie_name, cookie_value, lifespan_in_days, valid_domain) {</span></span>
+<span class="cstat-no" title="statement not covered" >        var domain_string = valid_domain ?</span>
+            ("; domain=" + valid_domain) : '';
+<span class="cstat-no" title="statement not covered" >        document.cookie = cookie_name +</span>
+            "=" + encodeURIComponent(cookie_value) +
+            "; max-age=" + 60 * 60 *
+            24 * lifespan_in_days +
+            "; path=/" + domain_string;
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    $scope.get_cookie = <span class="fstat-no" title="function not covered" >function(cookie_name) {</span></span>
+<span class="cstat-no" title="statement not covered" >        var cookie_string = document.cookie;</span>
+<span class="cstat-no" title="statement not covered" >        if (cookie_string.length != 0) {</span>
+<span class="cstat-no" title="statement not covered" >            var cookie_value = cookie_string.match(</span>
+                '(^|;)[\s]*' +
+                cookie_name +
+                '=([^;]*)');
+<span class="cstat-no" title="statement not covered" >            return decodeURIComponent(cookie_value[2]);</span>
+        }
+<span class="cstat-no" title="statement not covered" >        return '';</span>
+    }
+}
+&nbsp;</pre></td></tr>
+</table></pre>
+
+</div>
+<div class="footer">
+    <div class="meta">Generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Tue Jun 23 2015 21:41:07 GMT+0200 (West-Europa (zomertijd))</div>
+</div>
+<script src="../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../sorter.js"></script>
+</body>
+</html>

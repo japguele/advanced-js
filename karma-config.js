@@ -5,9 +5,10 @@ var istanbul = require('browserify-istanbul');
 module.exports = function (config) {
     config.set({
         basePath: '',
-        frameworks: ['mocha', 'chai', 'sinon', 'browserify'],
+        frameworks: ['mocha', 'chai', 'sinon', 'browserify', 'jasmine'],
         files: [
             'app/**/*.js',
+            'app/templates/*.html',
             // Angular-mocks moet na app.js geladen worden omdat daar angular in zit
             'node_modules/angular-mocks/angular-mocks.js',
             'test/*.spec.js'
@@ -19,7 +20,8 @@ module.exports = function (config) {
           // source files, that you wanna generate coverage for
           // do not include tests or libraries
           // (these files will be instrumented by Istanbul)
-          'app/**/*.js': ['coverage', 'browserify']
+          'app/**/*.js': ['coverage', 'browserify'],
+          'app/templates/*.html':['ng-html2js']
         },
 
         browserify: {
@@ -27,6 +29,10 @@ module.exports = function (config) {
           transform: [/*es6ify, brfs, 'browserify-shim',*/ istanbul({
             ignore: ['**/node_modules/**', '**/test/**'],
           })],
+        },
+
+        ngHtml2JsPreprocessor: {
+          stripPrefix: 'app/',
         },
 
         // optionally, configure the reporter

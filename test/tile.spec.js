@@ -1,25 +1,32 @@
-describe('TileFactory tests', function (){
-  var tileFactory;
-  
-  // excuted before each "it" is run.
-  beforeEach(function (){
-    
-    // load the module.
-    module('app');
-    
-    inject(function(_tileFactory_) {
-      tileFactory = _tileFactory_;
-    });
-  });
-     
-  // check to see if it has the expected function
-  it('should have an returnTiles function', function () { 
-    expect(angular.isFunction(tileFactory.returnTiles)).toBe(true);
-  });
+describe('TileFactory', function() {
 
-  it('should get Games', function(){
-	var tiles = tileFactory.getTiles();
-	httpBackend.flush();
-	expect(tiles).to.not.have.length(0);
-  });
+    var tileFactory;
+    
+    beforeEach(module('app'));
+    beforeEach(inject(function($rootScope, $httpBackend, $controller) {
+        tileFactory = $controller;
+    }));
+
+    //describe('Constructor', function() {
+        it('should have a method that returns the selected tile', function() {
+            //var tileFactory = createFactory();
+            tileFactory.selectedTile =  {
+                                            xPos: 7,
+                                            yPos: 1,
+                                            zPos: 0,
+                                            tile: {
+                                                _id: 76,
+                                                suit: "Character",
+                                                name: "2",
+                                                matchesWholeSuit: false,
+                                                __v: 0
+                                            },
+                                            _id: "5541fc5b1872631100678bb5"
+                                        };
+
+            console.log(tileFactory.getSelectedTile());
+            expect(tileFactory.getSelectedTile()).to.equals(tileFactory.selectedTile);
+        });
+
+    //});
 });
